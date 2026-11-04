@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>AstraLoader</AssemblyName>
+    <RootNamespace>NLCleaner</RootNamespace>
+    <Version>3.3.1</Version>
+    <ApplicationIcon>Assets\AstraLoader.ico</ApplicationIcon>
+    <AssemblyTitle>Astra Loader</AssemblyTitle>
+    <Description>Roblox removal and layered blocking for Windows</Description>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <PathMap>$(MSBuildProjectDirectory)=/_/AstraLoader</PathMap>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AstraLoader.ico" />
+    <Resource Include="Assets\AppIcon.png" />
+    <Compile Remove="tests\**;publish\**" />
+    <Page Remove="tests\**;publish\**" />
+    <None Remove="tests\**;publish\**" />
+    <Compile Remove="work\**;installer\**;dist\**" />
+    <Page Remove="work\**;installer\**;dist\**" />
+  </ItemGroup>
+</Project>

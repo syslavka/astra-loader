@@ -1,0 +1,22 @@
+# Generated files
+**/bin/
+**/obj/
+**/publish/
+**/dist/
+work/
+.vs/
+*.user
+*.suo
+*.pdb
+*.log
+*.bak
+*.zip
+# Private signing material and local settings
+certificates/
+*.pfx
+*.p12
+*.key
+*.pem
+*.cer
+.env
+.env.*

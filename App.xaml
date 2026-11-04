@@ -1,0 +1,67 @@
+<Application x:Class="NLCleaner.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Application.Resources>
+  <LinearGradientBrush x:Key="GlassFill" StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#21FFFFFF"/><GradientStop Color="#0CFFFFFF" Offset="0.5"/><GradientStop Color="#16BCCBFF" Offset="1"/></LinearGradientBrush>
+  <LinearGradientBrush x:Key="GlassEdge" StartPoint="0,0" EndPoint="0.7,1"><GradientStop Color="#68FFFFFF"/><GradientStop Color="#14FFFFFF" Offset="0.45"/><GradientStop Color="#32E0E6FF" Offset="1"/></LinearGradientBrush>
+  <Style TargetType="TextBlock"><Setter Property="Foreground" Value="#F5F6FF" /></Style>
+  <Style x:Key="GlassPanel" TargetType="Border">
+   <Setter Property="Background" Value="{StaticResource GlassFill}"/><Setter Property="BorderBrush" Value="{StaticResource GlassEdge}"/>
+   <Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="20"/><Setter Property="Padding" Value="18"/>
+  </Style>
+  <Style TargetType="Button">
+   <Setter Property="Foreground" Value="#F3F5FF"/><Setter Property="Background" Value="{StaticResource GlassFill}"/>
+   <Setter Property="BorderBrush" Value="{StaticResource GlassEdge}"/><Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="Padding" Value="16,12"/><Setter Property="Cursor" Value="Hand"/><Setter Property="FontSize" Value="12"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+    <Border x:Name="Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="18" RenderTransformOrigin="0.5,0.5">
+     <Border.RenderTransform><ScaleTransform x:Name="PressScale"/></Border.RenderTransform>
+     <Grid>
+      <Border x:Name="HoverTint" CornerRadius="18" Background="#FFFFFF" Opacity="0" IsHitTestVisible="False"/>
+      <Border BorderBrush="#1CFFFFFF" BorderThickness="0,1,0,0" CornerRadius="18" Margin="1" IsHitTestVisible="False"/>
+      <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+     </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+     <EventTrigger RoutedEvent="MouseEnter"><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="HoverTint" Storyboard.TargetProperty="Opacity" To="0.12" Duration="0:0:0.18"/></Storyboard></BeginStoryboard></EventTrigger>
+     <EventTrigger RoutedEvent="MouseLeave"><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="HoverTint" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.22"/></Storyboard></BeginStoryboard></EventTrigger>
+     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Surface" Property="RenderTransform"><Setter.Value><ScaleTransform ScaleX="0.975" ScaleY="0.975"/></Setter.Value></Setter></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="#B4D5FF"/></Trigger>
+     <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Surface" Property="Opacity" Value="0.35"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="TrafficLight" TargetType="Button">
+   <Setter Property="Width" Value="13"/><Setter Property="Height" Value="13"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+    <Grid><Ellipse Fill="{TemplateBinding Background}" Stroke="#38000000" StrokeThickness="0.7"/>
+     <ContentPresenter x:Name="Glyph" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0"/>
+    </Grid>
+    <ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Glyph" Property="Opacity" Value="0.75"/></Trigger></ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="GlassSwitch" TargetType="CheckBox">
+   <Setter Property="Foreground" Value="#D7E2F5"/><Setter Property="FontSize" Value="10"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="CheckBox">
+    <Grid MinHeight="28"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="33"/></Grid.ColumnDefinitions>
+     <ContentPresenter VerticalAlignment="Center"/>
+     <Border x:Name="Track" Grid.Column="1" CornerRadius="10" Height="18" Background="#28FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1">
+      <Ellipse x:Name="Knob" Width="12" Height="12" Fill="#E2E8F5" HorizontalAlignment="Left" Margin="2,0"/>
+     </Border>
+    </Grid>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsChecked" Value="True"><Setter TargetName="Track" Property="Background" Value="#A1649FE7"/><Setter TargetName="Knob" Property="HorizontalAlignment" Value="Right"/></Trigger>
+     <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.45"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Track" Property="BorderBrush" Value="#D2E4FF"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style TargetType="ScrollBar">
+   <Setter Property="Width" Value="7"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ScrollBar">
+    <Track x:Name="PART_Track" IsDirectionReversed="True" Orientation="Vertical">
+     <Track.DecreaseRepeatButton><RepeatButton Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/></Track.DecreaseRepeatButton>
+     <Track.Thumb><Thumb><Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="#577B86AF" CornerRadius="3" Margin="1"/></ControlTemplate></Thumb.Template></Thumb></Track.Thumb>
+     <Track.IncreaseRepeatButton><RepeatButton Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/></Track.IncreaseRepeatButton>
+    </Track>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+ </Application.Resources>
+</Application>
