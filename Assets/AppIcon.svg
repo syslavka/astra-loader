@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+ <defs>
+  <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#132a3b"/><stop offset="1" stop-color="#03080e"/></linearGradient>
+  <linearGradient id="accent"><stop stop-color="#8b6fff"/><stop offset="1" stop-color="#47c2ed"/></linearGradient>
+  <linearGradient id="letters" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#b5d8f0"/></linearGradient>
+  <path id="nl" d="M128 70L191 185H166L151 155H103L88 185H63 185ZM127 101L112 134H141Z"/>
+ </defs>
+ <rect x="8" y="8" width="240" height="240" rx="54" fill="url(#bg)" stroke="#35566e" stroke-width="3"/>
+ <rect x="44" y="44" width="48" height="6" rx="3" fill="url(#accent)"/>
+ <use href="#nl" transform="translate(0 4)" fill="#23588b"/>
+ <use href="#nl" fill="url(#letters)"/>
+ <rect x="165" y="207" width="48" height="5" rx="2.5" fill="url(#accent)"/>
+</svg>
